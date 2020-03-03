@@ -1,0 +1,7 @@
+setup.py
+BrewUtilities.egg-info/PKG-INFO
+BrewUtilities.egg-info/SOURCES.txt
+BrewUtilities.egg-info/dependency_links.txt
+BrewUtilities.egg-info/not-zip-safe
+BrewUtilities.egg-info/requires.txt
+BrewUtilities.egg-info/top_level.txt

@@ -1,0 +1,13 @@
+{
+    "ETHANOL_VLE_DATA":         "./stillvle.mat",
+    "REFLUX_RATIO":             3,
+
+    "MASH_IN_TEMP":             70,
+    "MASH_IN_TEMP_F":           158,
+    "AMBIENT_TEMP":             20,
+    "MASH_UP":                  true,
+    "QUARTS_PER_LBS":           1.5,
+    "LITERS_PER_KG":            3.5,
+    "GRAIN_PPG":                "./grain_ppg.json",
+    "GRAIN_PKL":                "./grain_pkl.json"
+}
