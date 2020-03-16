@@ -49,8 +49,11 @@ def b20200301ipa(beer_file='',save_beer=False, overwrite=False):
     hop_types = ['centennial']
 
     # Grain Bill kgs
-    grain_bill_dict = {'pale_malt': mu.lb2kg(10),
-                        'caramel_malt_60l': mu.lb2kg(0.5)}
+    grain_bill_dict = {'pale_malt': mu.lb2kg(0.84),
+                        'two_row_malt': mu.lb2kg(2.51),
+                        'pilsner_malt': mu.lb2kg(3.34),
+                        'pale_wheat_malt': mu.lb2kg(4.47),
+                        'caramel_malt_60l': mu.lb2kg(0.84)}
 
     #====================================================================
     # --------- Mash and water calculations

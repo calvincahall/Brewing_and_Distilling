@@ -1,8 +1,8 @@
 '''
-Type: Wash
-Name: Wash #14
-Brewed: 20200202
-Yeast: WLP099 Super High Gravity
+Type: 
+Name:
+Brewed:
+Yeast:
 
 '''
 
@@ -27,21 +27,17 @@ def m20200202wash0014(wash_file='',save_wash=False, overwrite=False):
         print('load in data')
 
     # ================= INPUTS =============================
-    name = "Wash #0014"
-    yeast = 'WLP099 Super High Gravity Yeast'
+    name = "None"
+    yeast = 'None'
     wash = bu(saps,name)
     final_vol = mu.gal2l(6.5)
     og = 1.075
-    fg = 1.004
+    fg = 1.007
     og_temp = 70
-    fg_temp = 70
+    fg_temp = 88
 
     # Grain Bill kgs
-    grain_bill_dict = {'white_wheat_malt': mu.lb2kg(3),
-                    'pale_malt': mu.lb2kg(1),
-                    'six_row_malt':mu.lb2kg(2),
-                    'rye_malt': mu.lb2kg(2),
-                    'flaked_corn': mu.lb2kg(9)}
+    grain_bill_dict = {}
 
     #====================================================================
     # --------- Mash and water calculations
@@ -86,5 +82,5 @@ def m20200202wash0014(wash_file='',save_wash=False, overwrite=False):
 
 # Run function
 wash_file = './washes_pickle.pickle'
-wash = m20200202wash0014(wash_file, save_wash=True, overwrite=False)
+wash = m20200202wash0014(wash_file, save_wash=False, overwrite=False)
 
