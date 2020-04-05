@@ -1,9 +1,8 @@
 '''
-Type: 
-Name:
-Brewed:
-Yeast:
-
+Type: Double Wash #0015
+Name: Wash #15
+Brewed: 20200321
+Yeast: Red Star Premier Cuvee
 '''
 
 # Import Python Modules
@@ -16,31 +15,30 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def mTBDwash0015(wash_file='',save_wash=False, overwrite=False):
+def m20200321wash0015(wash_file='',save_wash=False, overwrite=False):
     '''
     Returns wash object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 65
+    mash_in_temp_c = 70.5
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
 
     # ================= INPUTS =============================
     name = 'Wash #0015'
-    yeast = 'WLP099 Super High Gravity Yeast'
+    yeast = 'Red Star Premier Cuvee'
     wash = bu(saps,name)
-    final_vol = mu.gal2l(6.5)
-    og = 1.075
-    fg = 1.007
+    final_vol = mu.gal2l(6)
+    og = 1.090
+    fg = 1.008
     og_temp = 70
-    fg_temp = 88
+    fg_temp = 70
 
     # Grain Bill kgs
     grain_bill_dict = {
-                        'flaked_corn': mu.lb2kg(10),
-                        'pot_still_malt': mu.lb2kg(4),
-                        'white_wheat_malt': mu.lb2kg(3)
+                        'cracked_corn': mu.lb2kg(12),
+                        'sucrose': mu.lb2kg(8),
                         }
 
     #====================================================================
@@ -86,5 +84,5 @@ def mTBDwash0015(wash_file='',save_wash=False, overwrite=False):
 
 # Run function
 wash_file = './washes_pickle.pickle'
-wash = mTBDwash0015(wash_file, save_wash=False, overwrite=False)
+wash = m20200321wash0015(wash_file, save_wash=True, overwrite=False)
 

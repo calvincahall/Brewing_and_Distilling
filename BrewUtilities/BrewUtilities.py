@@ -25,6 +25,7 @@ class BrewUtilities:
 # Setters and Getters
     def set_name(self,name):
         self.name = name
+        
     def get_name(self):
         return self.name
 
@@ -75,6 +76,8 @@ class BrewUtilities:
     def set_classification(self,beer_class):
         '''Lager or Ale.'''
         self.classification = beer_class
+        return 
+        
     def get_classification(self):
         return self.classification
 
