@@ -5,11 +5,12 @@ Misc calcs for brew day of double wash.
 
 # Import custom modules
 from BrewUtilities import *
+import MiscUtilities as mu
 
-temp_1 = 65
-vol_1 = 23
-vol_2 = 3.7
-grain_mass = 4
+temp_1 = 67.3
+vol_1 = mu.gal2l(5.8)
+vol_2 = mu.gal2l(1)
+grain_mass = 6.8
 target_t = 70.5
 
 # temp_1 = mu.f2c(152)

@@ -32,7 +32,7 @@ def m20200404wash0017(wash_file='',save_wash=False, overwrite=False):
     wash = bu(saps,name)
     final_vol = mu.gal2l(6)
     og = 1.11
-    fg = 1.007
+    fg = 1.03
     og_temp = 70
     fg_temp = 70
 
