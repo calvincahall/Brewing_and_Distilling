@@ -1,11 +1,13 @@
 '''
-Type: Double IPA
-Name: They're
-Brewed:
-Yeast: WLP001 California Ale Yeast
+Type: Pale Lager
+Name: 
+Brewed: 20200411
+Yeast: WLP833 Bock Yeast
 Secondary:
 Kegged:
 Kicked:
+Notes:
+    Used 0.5 Ounce of lemon peel for the last 5 min of the boil.
 '''
 
 # Import Python Modules
@@ -18,44 +20,45 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def b20200301double_ipa(beer_file='',save_beer=False, overwrite=False):
+def b20200411pale_ale(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 70
+    mash_in_temp_c = 70.5
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
 
     # ================= INPUTS =============================
-    name = "They're"
-    classification = "Ale"
-    beer_type = "Double IPA"
-    yeast = 'WLP001 California Ale Yeast'
+    name = "None"
+    classification = "Lager"
+    beer_type = "Pale Lager"
+    yeast = 'WLP833 German Bock Yeast'
     beer = bu(saps, name)
-    final_vol = mu.gal2l(6)
-    og = 1.066
-    fg = 1.013
-    og_temp = 70
-    fg_temp = 70
+    final_vol = mu.gal2l(4)
+    og = 1.054
+    fg = 1.018
+    og_temp = 83
+    fg_temp = 64
 
     # hops = [Alpha, Boil, Ounces]
-    # boil < 0 means dry hopped.
-    additions = 2
+    additions = 1
     hops = np.array((additions,3))
-    centennial_1 = np.array([17,60,1.33])
-    centennial_2 = np.array([17,-1,5])
-    hops = np.stack( (centennial_1,centennial_2) )
+    cascade = np.array([3.8,60,0.65])
+    hops = cascade
     hops = hops.reshape((additions,3))
-    hop_types = ['centennial', 'centennial']
+    hop_types = ['cascade']
 
     # Grain Bill kgs
-    grain_bill_dict = {'pale_malt': mu.lb2kg(1.01),
-                        'two_row_malt': mu.lb2kg(3.03),
-                        'pilsner_malt': mu.lb2kg(4.05),
-                        'pale_wheat_malt': mu.lb2kg(6.40),
-                        'caramel_malt_60l': mu.lb2kg(1.01)}
+    grain_bill_dict = {
+                        'white_wheat_malt': 0.52,
+                        'pale_malt': 1.354,
+                        'pilsner_malt': 2.72
+                    }
+    # grain_bill_dict = {
+    #                     'cracked_corn': mu.lb2kg(5)
+    #                 }
 
     #====================================================================
     # --------- Mash and water calculations
@@ -109,5 +112,5 @@ def b20200301double_ipa(beer_file='',save_beer=False, overwrite=False):
 
 # Run function
 beer_file = './beers_pickle.pickle'
-beer = b20200301double_ipa(beer_file, save_beer=False, overwrite=False)
+beer = b20200411pale_ale(beer_file, save_beer=False, overwrite=False)
 # print('stop')

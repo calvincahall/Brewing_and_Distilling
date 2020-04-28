@@ -23,7 +23,7 @@ def b20200202milk_porter(beer_file='',save_beer=False, overwrite=False):
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 65
+    mash_in_temp_c = 70.5
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
@@ -35,16 +35,16 @@ def b20200202milk_porter(beer_file='',save_beer=False, overwrite=False):
     yeast = 'None'
     beer = bu(saps, name)
     final_vol = mu.gal2l()
-    og = 
-    fg = 
-    og_temp = 70
+    og = 1.00
+    fg = 1.010
+    og_temp = 155
     fg_temp = 70
 
     # hops = [Alpha, Boil, Ounces]
     additions = 1
     hops = np.array((additions,3))
     huell_melon = np.array([3.8,60,0.65])
-    hops = 
+    hops = huell_melon
     hops = hops.reshape((additions,3))
     hop_types = ['']
 
