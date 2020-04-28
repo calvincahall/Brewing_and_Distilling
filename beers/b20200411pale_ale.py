@@ -4,7 +4,7 @@ Name:
 Brewed: 20200411
 Yeast: WLP833 Bock Yeast
 Secondary:
-Kegged:
+Kegged: 20200427
 Kicked:
 Notes:
     Used 0.5 Ounce of lemon peel for the last 5 min of the boil.

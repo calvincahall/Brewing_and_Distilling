@@ -4,7 +4,7 @@ Name:
 Brewed: 20200411
 Yeast: WLP833 German Bock Yeast
 Secondary:
-Kegged:
+Kegged: 20200427
 Kicked:
 '''
 
