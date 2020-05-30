@@ -31,10 +31,10 @@ def b20200411pale_ale(beer_file='',save_beer=False, overwrite=False):
         print('load in data')
 
     # ================= INPUTS =============================
-    name = "None"
-    classification = "Lager"
-    beer_type = "Pale Lager"
-    yeast = 'WLP833 German Bock Yeast'
+    name = "John Lemmon"
+    classification = "Ale"
+    beer_type = "Pale Ale"
+    yeast = 'Safe Ale US-05'
     beer = bu(saps, name)
     final_vol = mu.gal2l(4)
     og = 1.054
@@ -45,7 +45,7 @@ def b20200411pale_ale(beer_file='',save_beer=False, overwrite=False):
     # hops = [Alpha, Boil, Ounces]
     additions = 1
     hops = np.array((additions,3))
-    cascade = np.array([3.8,60,0.65])
+    cascade = np.array([3.8,60,0.2])
     hops = cascade
     hops = hops.reshape((additions,3))
     hop_types = ['cascade']
@@ -56,9 +56,6 @@ def b20200411pale_ale(beer_file='',save_beer=False, overwrite=False):
                         'pale_malt': 1.354,
                         'pilsner_malt': 2.72
                     }
-    # grain_bill_dict = {
-    #                     'cracked_corn': mu.lb2kg(5)
-    #                 }
 
     #====================================================================
     # --------- Mash and water calculations
@@ -112,5 +109,5 @@ def b20200411pale_ale(beer_file='',save_beer=False, overwrite=False):
 
 # Run function
 beer_file = './beers_pickle.pickle'
-beer = b20200411pale_ale(beer_file, save_beer=False, overwrite=False)
+beer = b20200411pale_ale(beer_file, save_beer=True, overwrite=False)
 # print('stop')

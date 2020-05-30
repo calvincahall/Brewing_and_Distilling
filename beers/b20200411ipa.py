@@ -30,9 +30,9 @@ def b20200411ipa(beer_file='',save_beer=False, overwrite=False):
 
     # ================= INPUTS =============================
     name = "None"
-    classification = "Lager"
-    beer_type = "IPL"
-    yeast = 'WLP833 German Bock Yeast'
+    classification = "Ale"
+    beer_type = "IPA"
+    yeast = 'Safe Ale US-05'
     beer = bu(saps, name)
     final_vol = mu.gal2l(6)
     og = 1.056
@@ -43,7 +43,7 @@ def b20200411ipa(beer_file='',save_beer=False, overwrite=False):
     # hops = [Alpha, Boil, Ounces]
     additions = 1
     hops = np.array((additions,3))
-    cascade = np.array([12.8,60,0.20])
+    cascade = np.array([12.8,60,0.80])
     hops = cascade
     hops = hops.reshape((additions,3))
     hop_types = ['cascade']
