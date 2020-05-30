@@ -333,6 +333,32 @@ def delete_beer_from_archive(path_name, old_name):
 
     return
 
-        
+def what_water_temp(target_t,vol_2,vol_1,ti_1,grain_mass=0):
+    '''
+    Determines the temperature needed from volume 2 to raise the final
+    temperature to the target_t.
+    INPUT:
+        target_t    (int/float)     -temp celcius of final
+        vol_2       (float)         -volume in liters of water being heated
+        vol_1       (float)         -volume in liters of being diluted
+        ti_1        (float)         -temp of vol_1 in celcius
+        grain_mass  (float)         -mass of grain to consider in kg.
+    RETURN:
+        ti          (float)         -temp in celcius to heat vol_2 to
+    '''
+
+    # Heat capacity
+    cp_water=4.184      # J/(K g)
+    cp_grain=1.5968     # J/(K g)
+
+    mass_1 = vol_1 * 1000 # Convert L to mL -> grams.
+    mass_2 = vol_2 * 1000
+    grain_mass *=  1000
+    
+    # Celcius
+    target_heat = (target_t - ti_1) * cp_water * mass_1 + (target_t - ti_1) * cp_grain * grain_mass
+    ti = target_t + (target_heat / (cp_water * mass_2))
+    
+    return ti        
 
 

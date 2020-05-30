@@ -1,11 +1,13 @@
 '''
-Type: IPA
-Name: There
-Brewed: 
-Yeast: WLP001 California Ale Yeast
+Type: Pale Lager
+Name: 
+Brewed: 20200411
+Yeast: WLP833 Bock Yeast
 Secondary:
-Kegged:
+Kegged: 20200427
 Kicked:
+Notes:
+    Used 0.5 Ounce of lemon peel for the last 5 min of the boil.
 '''
 
 # Import Python Modules
@@ -18,39 +20,42 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def b20200301ipa(beer_file='',save_beer=False, overwrite=False):
+def b20200411pale_ale(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 70
+    mash_in_temp_c = 70.5
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
 
     # ================= INPUTS =============================
-    name = "There"
+    name = "John Lemmon"
     classification = "Ale"
-    beer_type = "IPA"
-    yeast = 'WLP001 California Ale Yeast'
+    beer_type = "Pale Ale"
+    yeast = 'Safe Ale US-05'
     beer = bu(saps, name)
-    final_vol = mu.gal2l(6)
-    og = 1.050
-    fg = 1.010
-    og_temp = 70
-    fg_temp = 70
+    final_vol = mu.gal2l(4)
+    og = 1.054
+    fg = 1.018
+    og_temp = 83
+    fg_temp = 64
 
     # hops = [Alpha, Boil, Ounces]
     additions = 1
     hops = np.array((additions,3))
-    centennial = np.array([17,60,0.66])
-    hops = centennial
+    cascade = np.array([3.8,60,0.2])
+    hops = cascade
     hops = hops.reshape((additions,3))
-    hop_types = ['centennial']
+    hop_types = ['cascade']
 
     # Grain Bill kgs
-    grain_bill_dict = {'pale_malt': mu.lb2kg(10),
-                        'caramel_malt_60l': mu.lb2kg(0.5)}
+    grain_bill_dict = {
+                        'white_wheat_malt': 0.52,
+                        'pale_malt': 1.354,
+                        'pilsner_malt': 2.72
+                    }
 
     #====================================================================
     # --------- Mash and water calculations
@@ -104,5 +109,5 @@ def b20200301ipa(beer_file='',save_beer=False, overwrite=False):
 
 # Run function
 beer_file = './beers_pickle.pickle'
-beer = b20200301ipa(beer_file, save_beer=False, overwrite=False)
+beer = b20200411pale_ale(beer_file, save_beer=True, overwrite=False)
 # print('stop')

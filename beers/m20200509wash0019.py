@@ -1,8 +1,8 @@
 '''
 Type: Wash
-Name: Wash #14
-Brewed: 20200202
-Yeast: WLP099 Super High Gravity
+Name: Wash #0019
+Brewed: 20200509
+Yeast: WLP099 Super High Gravity Yeast
 
 '''
 
@@ -16,33 +16,33 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def m20200202wash0014(wash_file='',save_wash=False, overwrite=False):
+def m20200509wash0019(wash_file='',save_wash=False, overwrite=False):
     '''
     Returns wash object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 65
+    mash_in_temp_c = 70.5
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
 
     # ================= INPUTS =============================
-    name = "Wash #0014"
+    name = "Wash #0019"
     yeast = 'WLP099 Super High Gravity Yeast'
     wash = bu(saps,name)
-    final_vol = mu.gal2l(6.5)
-    og = 1.075
-    fg = 1.004
-    og_temp = 70
+    final_vol = mu.gal2l(8)
+    og = 1.124
+    fg = 1.026
+    og_temp = 84
     fg_temp = 70
 
     # Grain Bill kgs
-    grain_bill_dict = {'white_wheat_malt': mu.lb2kg(3),
-                    'pale_malt': mu.lb2kg(1),
-                    'six_row_malt':mu.lb2kg(2),
-                    'rye_malt': mu.lb2kg(2),
-                    'flaked_corn': mu.lb2kg(9)}
-
+    grain_bill_dict = {
+                        'cracked_corn': 5,
+                        'white_wheat_malt': 2,
+                        'six_row_malt': 2.5,
+                        'sucrose': mu.lb2kg(9),
+                        }
     #====================================================================
     # --------- Mash and water calculations
     #====================================================================
@@ -86,5 +86,5 @@ def m20200202wash0014(wash_file='',save_wash=False, overwrite=False):
 
 # Run function
 wash_file = './washes_pickle.pickle'
-wash = m20200202wash0014(wash_file, save_wash=True, overwrite=False)
+wash = m20200509wash0019(wash_file, save_wash=False, overwrite=False)
 
