@@ -261,5 +261,33 @@ class BrewUtilities:
 
         return self.liter_vol, self.t_water
 
+    def lactose_addition(self, grain_bill, lactose_percent,
+                            batch_vol=mu.gal2l(5), efficiency=0.8):
+        '''
+        Calculates how much lactose to add for given percentage.
+        batch_vol(liters)
+        '''
+        lactose_percent /= 100
+        og_points = (self.potential_gravity(grain_bill,batch_vol) - 1) * efficiency
+        lac_og = (og_points * lactose_percent) / (1 - lactose_percent)
+
+        mass_lac = mu.lb2kg(1)
+        lac_bill = {
+            'lactose': mass_lac
+        }
+        tol = 0.0001
+        done = False
+        while not done:
+            lac_guess_points = self.potential_gravity(lac_bill,batch_vol) - 1
+
+            if abs(lac_guess_points - lac_og) < tol:
+                done = True
+            else:
+                error = (lac_og - lac_guess_points)/(lac_og + lac_guess_points)
+                mass_lac = mass_lac + (mass_lac * error)
+                lac_bill['lactose'] = mass_lac
+        
+        return mass_lac
+
 
         
