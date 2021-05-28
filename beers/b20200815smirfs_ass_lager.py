@@ -23,7 +23,7 @@ def b20200815smirfs_ass(beer_file='',save_beer=False, overwrite=False):
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 65
+    mash_in_temp_c = saps["MASH_IN_TEMP"]
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
@@ -34,10 +34,10 @@ def b20200815smirfs_ass(beer_file='',save_beer=False, overwrite=False):
     beer_type = "Citrus Lager"
     yeast = 'WLP883 Zurich Lager'
     beer = bu(saps, name)
-    final_vol = mu.gal2l(5)
-    og = 1.060
+    final_vol = mu.gal2l(5.8)
+    og = 1.056
     fg = 1.012
-    og_temp = 70
+    og_temp = 87
     fg_temp = 70
 
     # hops = [Alpha, Boil, Ounces]

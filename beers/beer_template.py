@@ -23,7 +23,7 @@ def b20200202milk_porter(beer_file='',save_beer=False, overwrite=False):
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 65
+    mash_in_temp_c = saps["MASH_IN_TEMP"]
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')

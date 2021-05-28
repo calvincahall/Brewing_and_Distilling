@@ -1,8 +1,8 @@
 '''
 Type: Ale
-Name: NA
-Brewed: 20200815
-Yeast: Wyeast 2308 Munich Lager
+Name: Smirf's Ass
+Brewed: April 10, 2021
+Yeast: WLP001 California Ale Yeast
 Secondary:
 Kegged:
 Kicked:
@@ -18,7 +18,7 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def b20200815orange_ale(beer_file='',save_beer=False, overwrite=False):
+def b20210410smirfs_ass(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
@@ -29,37 +29,33 @@ def b20200815orange_ale(beer_file='',save_beer=False, overwrite=False):
         print('load in data')
 
     # ================= INPUTS =============================
-    name = "Orange Ale"
+    name = "Smirf's Ass"
     classification = "Ale"
-    beer_type = "Orange Ale"
-    yeast = 'Wyeast 2308 Munich Yeast'
+    beer_type = "Wheat Ale"
+    yeast = 'WLP001 California Ale Yeast'
     beer = bu(saps, name)
-    final_vol = mu.gal2l(5.66)
-    og = 1.053
-    fg = 1.020
-    og_temp = 86
-    fg_temp = 70
-
-    lactose_percent = 6
+    final_vol = mu.gal2l(5)
+    og = 1.052
+    fg = 1.013
+    og_temp = 80
+    fg_temp = 69
 
     # hops = [Alpha, Boil, Ounces]
     additions = 2
     hops = np.array((additions,3))
-    falconers_1 = np.array([11.8,60,0.15])
-    falconers_2 = np.array([11.8,5,0.85])
-    hops = np.array([falconers_1, falconers_2])
-    hops = hops.reshape((additions,3))
-    hop_types = ['Falconer\'s Flight','Falconer\'s Flight']
+    cascade = np.array([6.5,60,0.25])
+    centennial = np.array([10,1,5])
+    hops = np.stack([cascade,centennial])
+    # hops = hops.reshape((additions,3))
+    hop_types = ['cascade','centennial']
 
     # Grain Bill kgs
-    grain_bill_dict = {'two_row_malt': mu.lb2kg(6),
-                        'honey_malt': mu.lb2kg(4),
-                        'lactose': 0.194}
-
-    lac_mass = beer.lactose_addition(grain_bill_dict,
-                                    lactose_percent, final_vol)
-    print("\nAdd {} kg ({} lbs) to wort in last 5 min.".
-            format(round(lac_mass,3),round(mu.kg2lb(lac_mass),3)))
+    grain_bill_dict = {
+            'caramel_malt_10l': mu.lb2kg(2),
+            'flaked_wheat':     mu.lb2kg(1),
+            'two_row_malt':     mu.lb2kg(4),
+            'white_wheat_malt': mu.lb2kg(4),
+    }
 
     #====================================================================
     # --------- Mash and water calculations
@@ -113,5 +109,5 @@ def b20200815orange_ale(beer_file='',save_beer=False, overwrite=False):
 
 # Run function
 beer_file = './beers_pickle.pickle'
-beer = b20200815orange_ale(beer_file, save_beer=False, overwrite=False)
-
+beer = b20210410smirfs_ass(beer_file, save_beer=True, overwrite=True)
+# print('stop')

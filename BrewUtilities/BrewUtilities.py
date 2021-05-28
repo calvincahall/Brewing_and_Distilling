@@ -290,4 +290,4 @@ class BrewUtilities:
         return mass_lac
 
 
-        
+
