@@ -106,7 +106,7 @@ def b20191231nut_brown(beer_file='',save_beer=False):
     print('     Calories:       {}'.format(round(calories,2)))
     print('\n')
 
-    overwrite = True
+
     if save_beer:
         mu.save_beer_to_archive(beer_file, beer, overwrite=overwrite)
 

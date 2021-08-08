@@ -107,5 +107,5 @@ def b20200411ipa(beer_file='',save_beer=False, overwrite=False):
 
 # Run function
 beer_file = './beers_pickle.pickle'
-beer = b20200411ipa(beer_file, save_beer=False, overwrite=False)
+beer = b20200411ipa(beer_file, save_beer=True, overwrite=True)
 # print('stop')

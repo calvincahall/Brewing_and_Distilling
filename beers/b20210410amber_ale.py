@@ -3,9 +3,6 @@ Type: Ale
 Name: Last Call for AlCahall
 Brewed: April 10, 2021
 Yeast: Safe Ale US-05
-Secondary:
-Kegged:
-Kicked:
 '''
 
 # Import Python Modules
@@ -26,7 +23,7 @@ def b20210410amber_ale(beer_file='',save_beer=False, overwrite=False):
     mash_in_temp_c = saps["MASH_IN_TEMP"]
     mash_temp_data = False
     if mash_temp_data:
-        print('load in data')
+        print('TODO: load in data')
 
     # ================= INPUTS =============================
     name = "Last Call for AlCahall"

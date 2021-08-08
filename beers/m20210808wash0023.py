@@ -1,8 +1,8 @@
 '''
-Type: 
-Name:
-Brewed:
-Yeast:
+Type: Bourbon
+Name: Wash #0023
+Brewed: 20210808
+Yeast: 
 
 '''
 
@@ -16,7 +16,7 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./wash_saps.json')
 
-def m20200202wash0014(wash_file='',save_wash=False, overwrite=False):
+def m20210808wash0023(wash_file='',save_wash=False, overwrite=False):
     '''
     Returns wash object with all attributes of brew day, fermentation, etc.
     '''
@@ -37,7 +37,11 @@ def m20200202wash0014(wash_file='',save_wash=False, overwrite=False):
     fg_temp = 88
 
     # Grain Bill kgs
-    grain_bill_dict = {}
+    grain_bill_dict = {
+            'flaked_corn':      mu.lb2kg(10),
+            'rye_malt':         mu.lb2kg(3),
+            'six_row_malt':     mu.lb2kg(6),
+    }
 
     #====================================================================
     # --------- Mash and water calculations
@@ -78,11 +82,11 @@ def m20200202wash0014(wash_file='',save_wash=False, overwrite=False):
     if save_wash:
         mu.save_beer_to_archive(wash_file, wash, overwrite=overwrite)
     else:
-        print("File not saved.")
+        print("File not saved")
 
     return wash
 
 # Run function
 wash_file = './washes_pickle.pickle'
-wash = m20200202wash0014(wash_file, save_wash=False, overwrite=False)
+wash = m20210808wash0023(wash_file, save_wash=False, overwrite=False)
 

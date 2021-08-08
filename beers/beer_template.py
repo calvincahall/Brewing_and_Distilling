@@ -98,6 +98,8 @@ def b20200202milk_porter(beer_file='',save_beer=False, overwrite=False):
 
     if save_beer:
         mu.save_beer_to_archive(beer_file, beer, overwrite=overwrite)
+    else:
+        print("File not saved.")
 
     return beer
 

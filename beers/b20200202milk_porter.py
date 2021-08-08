@@ -108,5 +108,5 @@ def b20200202milk_porter(beer_file='',save_beer=False, overwrite=False):
 
 # Run function
 beer_file = './beers_pickle.pickle'
-beer = b20200202milk_porter(beer_file, save_beer=True, overwrite=False)
+beer = b20200202milk_porter(beer_file, save_beer=True, overwrite=True)
 # print('stop')

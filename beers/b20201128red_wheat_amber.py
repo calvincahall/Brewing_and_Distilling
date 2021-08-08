@@ -109,5 +109,5 @@ def b20201128red_wheat_amber(beer_file='',save_beer=False, overwrite=False):
 
 # Run function
 beer_file = './beers_pickle.pickle'
-beer = b20201128red_wheat_amber(beer_file, save_beer=True, overwrite=False)
+beer = b20201128red_wheat_amber(beer_file, save_beer=True, overwrite=True)
 # print('stop')
