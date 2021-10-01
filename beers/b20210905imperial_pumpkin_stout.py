@@ -18,7 +18,7 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def bDATE_TEMPLATE(beer_file='',save_beer=False, overwrite=False):
+def b20210905imperial_pumpkin_stout(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
@@ -32,24 +32,29 @@ def bDATE_TEMPLATE(beer_file='',save_beer=False, overwrite=False):
     name = "None"
     classification = "None"
     beer_type = "None"
-    yeast = 'None'
+    yeast = 'SafeAle T-58'
     beer = bu(saps, name)
-    final_vol = mu.gal2l()
-    og = 
-    fg = 
-    og_temp = 70
+    final_vol = mu.gal2l(6)
+    og = 1.07
+    fg = 1.02
+    og_temp = 74
     fg_temp = 70
 
     # hops = [Alpha, Boil, Ounces]
     additions = 1
     hops = np.array((additions,3))
-    HOPS = np.array([3.8,60,0.65])
-    hops = 
+    willamette = np.array([4.2,60,1])
+    hops = np.array(willamette)
     hops = hops.reshape((additions,3))
-    hop_types = ['']
+    hop_types = ['willamette']
 
     # Grain Bill kgs
-    grain_bill_dict = {}
+    grain_bill_dict = {
+        'carafa_iii_malt':      mu.lb2kg(1),
+        'victory_malt':         mu.lb2kg(1),
+        'flaked_oats':          mu.lb2kg(0.5),
+        'six_row_malt':         mu.lb2kg(14)
+    }
 
     #====================================================================
     # --------- Mash and water calculations
@@ -106,5 +111,5 @@ def bDATE_TEMPLATE(beer_file='',save_beer=False, overwrite=False):
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = bDATE_TEMPLATE_NAME(beer_file, save_beer=False, overwrite=False)
+    beer = b20210905imperial_pumpkin_stout(beer_file, save_beer=True, overwrite=True)
     # print('stop')

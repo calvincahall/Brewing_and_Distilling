@@ -18,7 +18,7 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def bDATE_TEMPLATE(beer_file='',save_beer=False, overwrite=False):
+def b20210905honey_dipa(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
@@ -30,26 +30,32 @@ def bDATE_TEMPLATE(beer_file='',save_beer=False, overwrite=False):
 
     # ================= INPUTS =============================
     name = "None"
-    classification = "None"
-    beer_type = "None"
-    yeast = 'None'
+    classification = "Ale"
+    beer_type = "Double IPA"
+    yeast = 'SafeAle US-05'
     beer = bu(saps, name)
-    final_vol = mu.gal2l()
-    og = 
-    fg = 
-    og_temp = 70
+    final_vol = mu.gal2l(6)
+    og = 1.069
+    fg = 1.02
+    og_temp = 74
     fg_temp = 70
 
     # hops = [Alpha, Boil, Ounces]
     additions = 1
     hops = np.array((additions,3))
-    HOPS = np.array([3.8,60,0.65])
-    hops = 
-    hops = hops.reshape((additions,3))
-    hop_types = ['']
+    cascade = np.array([13.5, 60, 1])
+    horizon = np.array([11.4, 30, 1])
+    centennial = np.array([8, 5, 10])
+    hops = np.array([cascade, horizon, centennial])
+    hop_types = ['cascade, horizon, centennial']
 
     # Grain Bill kgs
-    grain_bill_dict = {}
+    grain_bill_dict = {
+        "two_row_malt": mu.lb2kg(12),
+        "caramel_malt_120l": mu.lb2kg(1),
+        "honey_malt":  mu.lb2kg(1),
+        "flaked_oats": mu.lb2kg(0.25)
+    }
 
     #====================================================================
     # --------- Mash and water calculations
@@ -106,5 +112,5 @@ def bDATE_TEMPLATE(beer_file='',save_beer=False, overwrite=False):
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = bDATE_TEMPLATE_NAME(beer_file, save_beer=False, overwrite=False)
+    beer = b20210905honey_dipa(beer_file, save_beer=True, overwrite=True)
     # print('stop')

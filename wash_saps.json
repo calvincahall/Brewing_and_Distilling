@@ -7,7 +7,7 @@
     "AMBIENT_TEMP":             20,
     "MASH_U":                  true,
     "QUARTS_PER_LBS":           2,
-    "LITERS_PER_KG":            4.65,
+    "LITERS_PER_KG":            3.65,
     "GRAIN_PPG":                "./grain_ppg.json",
     "GRAIN_PKL":                "./grain_pkl.json"
 }

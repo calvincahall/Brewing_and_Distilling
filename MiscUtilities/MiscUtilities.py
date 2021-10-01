@@ -69,6 +69,15 @@ def molefraction2abv(x_ethanol):
 
     return abv
 
+def qrts_per_lb_2_l_per_kg(q_per_lb):
+    '''
+    Converts quarts per pound to liters per kg.
+    '''
+    kgs = lb2kg(1)
+    l = gal2l(0.25 * q_per_lb)
+    l_per_kgs = l/kgs
+    return l_per_kgs
+
 def abv2molefraction(abv):
     '''
     Assumes binary solution of ethanol and water. Returns the mole

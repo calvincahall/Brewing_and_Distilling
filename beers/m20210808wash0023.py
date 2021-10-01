@@ -21,20 +21,20 @@ def m20210808wash0023(wash_file='',save_wash=False, overwrite=False):
     Returns wash object with all attributes of brew day, fermentation, etc.
     '''
     # ---------- Constants -----------------------------
-    mash_in_temp_c = 65
+    mash_in_temp_c = 70.5
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
 
     # ================= INPUTS =============================
-    name = "None"
-    yeast = 'None'
+    name = "Wash #0023"
+    yeast = '48h Turbo Yeast'
     wash = bu(saps,name)
-    final_vol = mu.gal2l(6.5)
-    og = 1.075
-    fg = 1.007
-    og_temp = 70
-    fg_temp = 88
+    final_vol = mu.gal2l(11)
+    og = 1.06
+    fg = 1.014
+    og_temp = 88
+    fg_temp = 72
 
     # Grain Bill kgs
     grain_bill_dict = {
@@ -88,5 +88,5 @@ def m20210808wash0023(wash_file='',save_wash=False, overwrite=False):
 
 # Run function
 wash_file = './washes_pickle.pickle'
-wash = m20210808wash0023(wash_file, save_wash=False, overwrite=False)
+wash = m20210808wash0023(wash_file, save_wash=True, overwrite=True)
 
