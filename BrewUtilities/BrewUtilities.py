@@ -9,7 +9,6 @@ Created: 20191005
 '''
 
 # Import Python Modules
-import math
 import numpy as np
 
 # Import Custom Modules
@@ -58,6 +57,11 @@ class BrewUtilities:
     def get_mash_temps(self):
         return self.mash_temps
 
+    def set_mash_in_temp(self,mash_in):
+        self.mash_in_temp = mash_in
+    def get_mash_in_temp(self):
+        return self.mash_in_temp
+
     def set_grain_bill_dict(self,grain_bill_dict):
         self.grain_bill_dict = grain_bill_dict
     def get_grain_bill_dict(self):
@@ -86,7 +90,10 @@ class BrewUtilities:
     def get_beer_type(self):
         return self.beer_type
         
-
+    def set_efficeincy(self,eff):
+        self.efficeincy = eff
+    def get_efficeincy(self):
+        return self.efficeincy
 #
     # Properties
     def ibus(self, hops):
@@ -101,9 +108,9 @@ class BrewUtilities:
         ibus = 0        
     
         # Break into data types
-        alpha=hops[:,0];
-        boil_time=hops[:,1];
-        ounces=hops[:,2];
+        alpha=hops[:,0]
+        boil_time=hops[:,1]
+        ounces=hops[:,2]
 
         assert len(alpha)==len(boil_time)==len(ounces), "Dimensions of each piece of data must be equal."
 
@@ -138,10 +145,11 @@ class BrewUtilities:
             elif boil_time[index] < 0:
                 ut[index]=0
 
-        ibuarray = (ounces * alpha * ut) / 7.25;
-        self.ibus = sum(ibuarray);
+        ibuarray = (ounces * alpha * ut) / 7.25
+        self.ibus = sum(ibuarray)
 
         return self.ibus
+
 
     def potential_gravity(self, grain_bill_dict, wort_vol, grain_units=None):
         '''
@@ -178,6 +186,7 @@ class BrewUtilities:
 
         return self.potential_og
 
+
     def abv(self, og=None,tog=60,fg=None,tfg=60):
         '''
         Calculates the estimated alcohol by volume using original and final gravities.
@@ -199,13 +208,14 @@ class BrewUtilities:
         den_water_60 = 1.00130346 - (1.34722124e-4)*tref + (2.04052596e-6)*tref**2 - (2.32820948e-9)*tref**3
 
         # Temperature corrrection factors
-        wtog = 1.00130346 - (1.34722124e-4)*tog + (2.04052596e-6)*(tog**2) - (2.32820948e-9)*(tog**3);
-        wtfg = 1.00130346 - (1.34722124e-4)*tfg + (2.04052596e-6)*(tfg**2) - (2.32820948e-9)*(tfg**3);
-        cog=og*wtog;
-        cfg=fg*wtfg;
+        wtog = 1.00130346 - (1.34722124e-4)*tog + (2.04052596e-6)*(tog**2) - (2.32820948e-9)*(tog**3)
+        wtfg = 1.00130346 - (1.34722124e-4)*tfg + (2.04052596e-6)*(tfg**2) - (2.32820948e-9)*(tfg**3)
+        cog=og*wtog
+        cfg=fg*wtfg
 
         self.abv = (76.08*(cog-cfg))/(1.775-cog) * (cfg/0.794)
         return self.abv
+
 
     def calories(self, og=None, fg=None):
         '''
@@ -225,22 +235,26 @@ class BrewUtilities:
             fg = self.fg
 
         # Calories in my burr
-        self.calories = 3621*fg*((0.8114*fg+0.1886*og-1)+0.53*((og-fg)/(1.775-og)));
+        self.calories = 3621*fg*((0.8114*fg+0.1886*og-1)+0.53*((og-fg)/(1.775-og)))
 
         return self.calories
 
-    def mash_in(self,mass_grain,target_temp,grain_units='pkl'):
+
+    def mash_in(self,mass_grain,target_temp,grain_water_ratio=3.5,
+                    t_grain=20):
         '''
         Calculates the water volume and temperature needed for the desired
         grain to water ratio and mash-in temp.
         Inputs:
             mass_grain:         -mass of the grain in kg
             grain_units:        -'pkl' is default. 'ppg' may be future option
+            grain_water_ratio:  -ratio of grain to water in liters/kg
+            t_grain:            -ambient temperature in C.
         Return:
-            mash_vol:           -Volume of water needed for grain ratio
-            t_water:            -water temperature to pour over grain
+            mash_vol:           -Volume of water (l) needed for grain ratio
+            t_water:            -water temperature (C) to pour over grain
         '''
-        grain_water_ratio = self.saps["LITERS_PER_KG"]
+
         mash_in_temp = target_temp
 
         # Heat capacity
@@ -255,11 +269,11 @@ class BrewUtilities:
         mass_water = mash_vol # g
 
         # Temps
-        t_grain = self.saps["AMBIENT_TEMP"] # Ambient temp of grain
         self.t_water = (cp_grain*mass_grain*(mash_in_temp-t_grain)+cp_water*mass_water*mash_in_temp)/(cp_water*mass_water)
         self.liter_vol = mash_vol / 1000
 
         return self.liter_vol, self.t_water
+
 
     def lactose_addition(self, grain_bill, lactose_percent,
                             batch_vol=mu.gal2l(5), efficiency=0.8):

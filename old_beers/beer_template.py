@@ -1,11 +1,11 @@
 '''
-Type:       
+Type:
 Name:
-Brewed:     
-Yeast:      
-Secondary:  
-Kegged:     
-Kicked:     
+Brewed:
+Yeast:
+Secondary:
+Kegged:
+Kicked:
 '''
 
 # Import Python Modules
@@ -18,53 +18,44 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
+def bDATE_TEMPLATE(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
-
-    # ================= INPUTS =============================
-    name = "None"
-    classification = ""
-    beer_type = ""
-    yeast = ""
-
-    beer = bu(saps, name)
-    final_vol = mu.gal2l(5)
-    og = 1.1
-    fg = 1.09
-    og_temp = 70 # F
-    fg_temp = 70 # F
-
-    # ========= MASH =======================================
-    mash_in_temp_c = 70.2
-    ambient_temp = 15
-    grain_water_ratio = 3.5 # kg/l
+    # ---------- Constants -----------------------------
+    mash_in_temp_c = saps["MASH_IN_TEMP"]
     mash_temp_data = False
     if mash_temp_data:
         print('load in data')
 
-    # ======== HOPS ========================================
-    # hops = [Alpha, Boil, Ounces]
-    hop1= np.array([1,60,0.25])
-    hop2 = np.array([10,0,5])
-    hops = np.array([hop1,hop2])
-    hop_types = ['Horizon', 'Centennial']
+    # ================= INPUTS =============================
+    name = "None"
+    classification = "None"
+    beer_type = "None"
+    yeast = 'None'
+    beer = bu(saps, name)
+    final_vol = mu.gal2l()
+    og = 
+    fg = 
+    og_temp = 70
+    fg_temp = 70
 
-    # ======= GRAIN ========================================
-    grain_bill_dict = {
-        'red_wheat_malt':   mu.lb2kg(6),
-        'two_row_malt':     mu.lb2kg(6),
-        'rye_malt':         mu.lb2kg(1),
-    }
+    # hops = [Alpha, Boil, Ounces]
+    additions = 1
+    hops = np.array((additions,3))
+    HOPS = np.array([3.8,60,0.65])
+    hops = 
+    hops = hops.reshape((additions,3))
+    hop_types = ['']
+
+    # Grain Bill kgs
+    grain_bill_dict = {}
 
     #====================================================================
     # --------- Mash and water calculations
     #====================================================================
     total_grain = sum(grain_bill_dict.values())
-    mash_vol, t_water = beer.mash_in(total_grain,mash_in_temp_c,
-                                    grain_water_ratio,
-                                    t_grain=ambient_temp)
+    mash_vol, t_water = beer.mash_in(total_grain,mash_in_temp_c)
 
     #====================================================================
     #---------- Calculated values
@@ -85,12 +76,9 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
     theo_points = (theoretical - 1) * 1000
     og_points = (og - 1) * 1000
     efficeincy = og_points/theo_points * 100
-    beer.set_efficeincy(efficeincy)
-
     abv = beer.abv(tog=og_temp,tfg=fg_temp)
     ibus = beer.ibus(hops)
     calories = beer.calories(og,fg)
-
 
     print('\n')
     print("BEER: " + name + '\n')
@@ -118,5 +106,5 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = bNEW_BEER(beer_file, save_beer=False, overwrite=False)
+    beer = bDATE_TEMPLATE_NAME(beer_file, save_beer=False, overwrite=False)
     # print('stop')

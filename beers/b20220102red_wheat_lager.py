@@ -1,11 +1,11 @@
 '''
-Type:       
+Type:       Lager
 Name:
-Brewed:     
-Yeast:      
-Secondary:  
-Kegged:     
-Kicked:     
+Brewed:     20220102
+Yeast:      Safelager S-23
+Secondary:  TBD
+Kegged:     TBD
+Kicked:     TBD
 '''
 
 # Import Python Modules
@@ -18,22 +18,22 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
+def b20220102red_wheat_lager(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
 
     # ================= INPUTS =============================
-    name = "None"
-    classification = ""
-    beer_type = ""
-    yeast = ""
+    name = "Amber Waves"
+    classification = "Lager"
+    beer_type = "Red Wheat Lager"
+    yeast = 'Safelager S-23'
 
     beer = bu(saps, name)
-    final_vol = mu.gal2l(5)
-    og = 1.1
-    fg = 1.09
-    og_temp = 70 # F
+    final_vol = mu.gal2l(5.8)
+    og = 1.054
+    fg = 1.014
+    og_temp = 75 # F
     fg_temp = 70 # F
 
     # ========= MASH =======================================
@@ -46,9 +46,9 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
 
     # ======== HOPS ========================================
     # hops = [Alpha, Boil, Ounces]
-    hop1= np.array([1,60,0.25])
-    hop2 = np.array([10,0,5])
-    hops = np.array([hop1,hop2])
+    horizon = np.array([11.4,60,0.25])
+    centennial = np.array([10,0,5])
+    hops = np.array([horizon, centennial])
     hop_types = ['Horizon', 'Centennial']
 
     # ======= GRAIN ========================================
@@ -118,5 +118,5 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = bNEW_BEER(beer_file, save_beer=False, overwrite=False)
+    beer = b20220102red_wheat_lager(beer_file, save_beer=False, overwrite=False)
     # print('stop')
