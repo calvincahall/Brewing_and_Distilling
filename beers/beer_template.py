@@ -83,8 +83,7 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
     theoretical = beer.potential_gravity(grain_bill_dict, final_vol, 
                                         grain_units='plk')
     theo_points = (theoretical - 1) * 1000
-    og_points = (og - 1) * 1000
-    efficeincy = og_points/theo_points * 100
+    efficeincy = beer.efficiency(og, og_temp, theo_points)
     beer.set_efficeincy(efficeincy)
 
     abv = beer.abv(tog=og_temp,tfg=fg_temp)

@@ -150,6 +150,23 @@ class BrewUtilities:
 
         return self.ibus
 
+    
+    def efficiency(self, og, tog, theo_points):
+        '''
+        Calculate efficiency accounting for temperatures at OG and FG.
+        '''
+        wtog = 1.00130346 - (1.34722124e-4)*tog + (2.04052596e-6)*(tog**2) - (2.32820948e-9)*(tog**3)
+        # wtfg = 1.00130346 - (1.34722124e-4)*tfg + (2.04052596e-6)*(tfg**2) - (2.32820948e-9)*(tfg**3)
+        cog=og*wtog
+        # cfg=fg*wtfg
+        cog_points = (cog - 1) * 1000
+
+        eff = cog_points/theo_points
+
+        return eff
+
+
+
 
     def potential_gravity(self, grain_bill_dict, wort_vol, grain_units=None):
         '''

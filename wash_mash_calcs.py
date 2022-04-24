@@ -7,11 +7,11 @@ Misc calcs for brew day of double wash.
 from BrewUtilities import *
 import MiscUtilities as mu
 
-temp_1 = 65
-vol_1 = mu.gal2l(9)
+temp_1 = 78
+vol_1 = mu.gal2l(7)
 vol_2 = mu.gal2l(2)
-grain_mass = mu.lb2kg(19)
-target_t = 72
+grain_mass = mu.lb2kg(15)
+target_t = 75
 
 # temp_1 = mu.f2c(152)
 # vol_1 = mu.gal2l(5)
@@ -21,6 +21,3 @@ target_t = 72
 
 ti = mu.what_water_temp(target_t,vol_2,vol_1,temp_1,grain_mass)
 print(ti)
-
-
-print(mu.f2c(50))

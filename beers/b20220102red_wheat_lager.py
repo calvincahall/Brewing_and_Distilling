@@ -1,10 +1,10 @@
 '''
 Type:       Lager
-Name:
+Name:       Amber Waves
 Brewed:     20220102
 Yeast:      Safelager S-23
-Secondary:  TBD
-Kegged:     TBD
+Secondary:  20220114
+Kegged:     20220121
 Kicked:     TBD
 '''
 
@@ -32,9 +32,9 @@ def b20220102red_wheat_lager(beer_file='',save_beer=False, overwrite=False):
     beer = bu(saps, name)
     final_vol = mu.gal2l(5.8)
     og = 1.054
-    fg = 1.014
+    fg = 1.015
     og_temp = 75 # F
-    fg_temp = 70 # F
+    fg_temp = mu.c2f(15) # F
 
     # ========= MASH =======================================
     mash_in_temp_c = 70.2
