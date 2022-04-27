@@ -1,4 +1,5 @@
 '''
+ID: 
 Type:       
 Name:
 Brewed:     
@@ -24,25 +25,18 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
     '''
 
     # ================= INPUTS =============================
+    id = 'bXXXX'
     name = "None"
     classification = ""
     beer_type = ""
     yeast = ""
 
-    beer = bu(saps, name)
     final_vol = mu.gal2l(5)
-    og = 1.1
-    fg = 1.09
+    og = 1.01
+    fg = 1.009
     og_temp = 70 # F
     fg_temp = 70 # F
-
-    # ========= MASH =======================================
-    mash_in_temp_c = 70.2
-    ambient_temp = 15
-    grain_water_ratio = 3.5 # kg/l
-    mash_temp_data = False
-    if mash_temp_data:
-        print('load in data')
+    ambient_temp = 15 # C
 
     # ======== HOPS ========================================
     # hops = [Alpha, Boil, Ounces]
@@ -61,6 +55,10 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
     #====================================================================
     # --------- Mash and water calculations
     #====================================================================
+    beer = bu(saps, id)
+    # ========= MASH =======================================
+    mash_in_temp_c = 70.2 # F 
+    grain_water_ratio = 3.5 # kg/l
     total_grain = sum(grain_bill_dict.values())
     mash_vol, t_water = beer.mash_in(total_grain,mash_in_temp_c,
                                     grain_water_ratio,

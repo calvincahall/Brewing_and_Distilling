@@ -2,7 +2,7 @@
 Type: Wash, Whiskey 
 Name: Wash0026
 Brewed: April 24, 2022
-Yeast:
+Yeast: Redstar spirit yeast
 
 '''
 
@@ -16,20 +16,21 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./wash_saps.json')
 
-def m20220424wash0025(wash='',save_wash=False, overwrite=False):
+def m20220424wash0026(wash='',save_wash=False, overwrite=False):
     '''
     Returns wash object with all attributes of brew day, fermentation, etc.
     '''
 
     # ================= INPUTS =============================
-    name = "None"
-    yeast = 'None'
-    wash = bu(saps,name)
-    final_vol = mu.gal2l(9)
-    og = 1.075
-    fg = 1.015
-    og_temp = 70
-    fg_temp = 88
+    id = "Wash0026"
+    yeast = 'Redstar Spirit Yeast'
+    wash = bu(saps,id)
+    final_vol = mu.gal2l(14)
+    og = 1.070
+    fg = 1.025
+    og_temp = mu.c2f(40)
+    fg_temp = mu.c2f(20)
+    notes = {''}
 
     # ======== MASH ========================================
     mash_in_temp_c = 70.5
@@ -41,10 +42,26 @@ def m20220424wash0025(wash='',save_wash=False, overwrite=False):
 
 
     # Grain Bill kgs
+    # # 1
+    # grain_bill_dict = {
+    #         'flaked_corn':      mu.lb2kg(7),
+    #         'pale_malt':        mu.lb2kg(8),
+    #         'rye_malt':         mu.lb2kg(2),
+    #         'white_wheat_malt': mu.lb2kg(3)
+    # }
+    # # 2
+    # grain_bill_dict = {
+    #         'flaked_corn':      mu.lb2kg(2),
+    #         'pale_malt':        mu.lb2kg(8),
+    #         'rye_malt':         mu.lb2kg(2),
+    #         'white_wheat_malt': mu.lb2kg(3)
+    # }
+    # TOTAL
     grain_bill_dict = {
-            'flaked_corn':      mu.lb2kg(8),
-            'two_row_malt':     mu.lb2kg(8),
-            'white_wheat_malt': mu.lb2kg(4)
+            'flaked_corn':      mu.lb2kg(15),
+            'pale_malt':        mu.lb2kg(16),
+            'rye_malt':         mu.lb2kg(4),
+            'white_wheat_malt': mu.lb2kg(6)
     }
 
     #====================================================================
@@ -68,10 +85,11 @@ def m20220424wash0025(wash='',save_wash=False, overwrite=False):
     theo_points = (theoretical - 1) * 1000
     og_points = (og - 1) * 1000
     efficeincy = wash.efficiency(og_points, og_temp, theo_points)
+    wash.set_efficeincy(efficeincy)
     abv = wash.abv(tog=og_temp,tfg=fg_temp)
 
     print('\n')
-    print("Wash: " + name + '\n')
+    print("Wash: " + id + '\n')
     print('MASH:')
     print('     Water vol(l):   {}'.format(round(mash_vol,2)))
     print('     Water vol(gal): {}'.format(round(mu.l2gal(mash_vol),2)))
@@ -94,5 +112,5 @@ def m20220424wash0025(wash='',save_wash=False, overwrite=False):
 
 # Run function
 wash_file = './washes_pickle.pickle'
-wash = m20220424wash0025(wash_file, save_wash=False, overwrite=False)
+wash = m20220424wash0026(wash_file, save_wash=True, overwrite=False)
 

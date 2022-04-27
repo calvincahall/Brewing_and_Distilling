@@ -17,11 +17,16 @@ import MiscUtilities as mu
 
 class BrewUtilities:
 
-    def __init__(self, saps, name):
+    def __init__(self, saps, id):
         self.saps = saps # System adjustable parameters json file
-        self.name = name
+        self.id = id
 
 # Setters and Getters
+    def set_id(self,id):
+        self.id = id
+    def get_id(self):
+        return self.id
+
     def set_name(self,name):
         self.name = name
         
@@ -45,6 +50,11 @@ class BrewUtilities:
         self.fg = fg
     def get_fg(self):
         return self.fg
+
+    def set_notes(self,notes):
+        self.notes = notes
+    def get_notes(self):
+        return self.notes
 
     def set_final_vol_L(self,vol_l):
         '''Set final volume of beer in fermenter. (Liters)'''
@@ -151,17 +161,17 @@ class BrewUtilities:
         return self.ibus
 
     
-    def efficiency(self, og, tog, theo_points):
+    def efficiency(self, og_points, tog, theo_points):
         '''
         Calculate efficiency accounting for temperatures at OG and FG.
         '''
         wtog = 1.00130346 - (1.34722124e-4)*tog + (2.04052596e-6)*(tog**2) - (2.32820948e-9)*(tog**3)
         # wtfg = 1.00130346 - (1.34722124e-4)*tfg + (2.04052596e-6)*(tfg**2) - (2.32820948e-9)*(tfg**3)
-        cog=og*wtog
+        cog_points=og_points*wtog
         # cfg=fg*wtfg
-        cog_points = (cog - 1) * 1000
+        # cog_points = (cog - 1) * 1000
 
-        eff = cog_points/theo_points
+        eff = (cog_points/theo_points) * 100
 
         return eff
 

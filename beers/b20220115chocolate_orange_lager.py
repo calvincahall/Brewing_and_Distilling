@@ -1,4 +1,5 @@
 '''
+ID:         b0002
 Type:       Lager
 Name:       Poopy Flavored Push Pop
 Brewed:     20220115
@@ -24,12 +25,15 @@ def b20220115chocolate_orange_lager(beer_file='',save_beer=False, overwrite=Fals
     '''
 
     # ================= INPUTS =============================
-    name = " "
+    id = "b0002"
+    name = "Poopy Flavored Push Pop"
     classification = "Lager"
     beer_type = "Brown Lager"
     yeast = "Safe Lager S-23"
+    notes = {"It did not tast good. Poured out last gallon."}
 
-    beer = bu(saps, name)
+    beer = bu(saps, id)
+    beer.set_name(name)
     final_vol = mu.gal2l(5)
     og = 1.067
     fg = 1.018
@@ -86,7 +90,7 @@ def b20220115chocolate_orange_lager(beer_file='',save_beer=False, overwrite=Fals
                                         grain_units='plk')
     theo_points = (theoretical - 1) * 1000
     og_points = (og - 1) * 1000
-    efficeincy = og_points/theo_points * 100
+    efficeincy = beer.efficiency(og_points,og_temp,theo_points)
     beer.set_efficeincy(efficeincy)
 
     abv = beer.abv(tog=og_temp,tfg=fg_temp)
@@ -120,5 +124,5 @@ def b20220115chocolate_orange_lager(beer_file='',save_beer=False, overwrite=Fals
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = b20220115chocolate_orange_lager(beer_file, save_beer=False, overwrite=False)
+    beer = b20220115chocolate_orange_lager(beer_file, save_beer=True, overwrite=True)
     # print('stop')

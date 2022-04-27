@@ -21,14 +21,15 @@ def mNEW_WASH(wash_file='',save_wash=False, overwrite=False):
     '''
 
     # ================= INPUTS =============================
-    name = "Wash0025"
+    id = "Wash0025"
     yeast = 'Turbo 48h Yeast'
-    wash = bu(saps,name)
+    wash = bu(saps,id)
     final_vol = mu.gal2l(12)
     og = 1.049
     fg = 1.012
     og_temp = mu.c2f(27.1)
     fg_temp = mu.c2f(18.8)
+    notes = {''}
 
     # ======== MASH ========================================
     mash_in_temp_c = 70.5
@@ -62,14 +63,16 @@ def mNEW_WASH(wash_file='',save_wash=False, overwrite=False):
     wash.set_yeast(yeast)
     wash.set_final_vol_L(final_vol)
     wash.set_grain_bill_dict(grain_bill_dict)
+    wash.set_notes(notes)
     theoretical = wash.potential_gravity(grain_bill_dict, final_vol, 
                                     grain_units='plk')
     theo_points = (theoretical - 1) * 1000
-    efficeincy = wash.efficiency(og, og_temp, theo_points)
+    og_points = (og - 1) * 1000
+    efficeincy = wash.efficiency(og_points, og_temp, theo_points)
     abv = wash.abv(tog=og_temp,tfg=fg_temp)
 
     print('\n')
-    print("Wash: " + name + '\n')
+    print("Wash: " + id + '\n')
     print('MASH:')
     print('     Water vol(l):   {}'.format(round(mash_vol,2)))
     print('     Water vol(gal): {}'.format(round(mu.l2gal(mash_vol),2)))

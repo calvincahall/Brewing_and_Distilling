@@ -3,7 +3,7 @@ Type:       Ale
 Name:       Not so Pale Ale
 Brewed:     March 19, 2022
 Yeast:      Safe Ale US-05
-Secondary:  
+Secondary:  4-13-2022
 Kegged:     
 Kicked:     
 '''
@@ -24,17 +24,20 @@ def b20220319notsopaleale(beer_file='',save_beer=False, overwrite=False):
     '''
 
     # ================= INPUTS =============================
+    id = "b0003"
     name = "Not So Pale Ale"
     classification = "Ale"
     beer_type = "Pale Ale"
     yeast = "SafeAle US-05"
 
-    beer = bu(saps, name)
+    beer = bu(saps, id)
+    beer.set_name(name)
     final_vol = mu.gal2l(5.4)
     og = 1.058
-    fg = 1.014
+    fg = 1.018
     og_temp = mu.c2f(20) # F
-    fg_temp = 70 # F
+    fg_temp = mu.c2f(20) # F
+    notes = {"So far so good. Tastes like beer."}
 
     # ========= MASH =======================================
     mash_in_temp_c = 70.2
@@ -84,7 +87,8 @@ def b20220319notsopaleale(beer_file='',save_beer=False, overwrite=False):
     theoretical = beer.potential_gravity(grain_bill_dict, final_vol, 
                                         grain_units='plk')
     theo_points = (theoretical - 1) * 1000
-    efficeincy = beer.efficiency(og, og_temp, theo_points)
+    og_points = (og-1) * 1000
+    efficeincy = beer.efficiency(og_points, og_temp, theo_points)
     beer.set_efficeincy(efficeincy)
 
     abv = beer.abv(tog=og_temp,tfg=fg_temp)

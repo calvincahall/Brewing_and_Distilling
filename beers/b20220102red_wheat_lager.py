@@ -1,4 +1,5 @@
 '''
+ID:         b0001
 Type:       Lager
 Name:       Amber Waves
 Brewed:     20220102
@@ -24,17 +25,21 @@ def b20220102red_wheat_lager(beer_file='',save_beer=False, overwrite=False):
     '''
 
     # ================= INPUTS =============================
+    id = 'b0001'
     name = "Amber Waves"
     classification = "Lager"
     beer_type = "Red Wheat Lager"
     yeast = 'Safelager S-23'
 
-    beer = bu(saps, name)
+    beer = bu(saps, id)
+    beer.set_name(name)
     final_vol = mu.gal2l(5.8)
     og = 1.054
     fg = 1.015
     og_temp = 75 # F
     fg_temp = mu.c2f(15) # F
+
+    notes = {""}
 
     # ========= MASH =======================================
     mash_in_temp_c = 70.2
@@ -79,6 +84,7 @@ def b20220102red_wheat_lager(beer_file='',save_beer=False, overwrite=False):
     beer.set_grain_bill_dict(grain_bill_dict)
     beer.set_hop_types(hop_types)
     beer.set_hops(hops)
+    beer.set_notes(notes)
 
     theoretical = beer.potential_gravity(grain_bill_dict, final_vol, 
                                         grain_units='plk')
@@ -118,5 +124,5 @@ def b20220102red_wheat_lager(beer_file='',save_beer=False, overwrite=False):
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = b20220102red_wheat_lager(beer_file, save_beer=False, overwrite=False)
+    beer = b20220102red_wheat_lager(beer_file, save_beer=True, overwrite=True)
     # print('stop')

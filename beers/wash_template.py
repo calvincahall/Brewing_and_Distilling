@@ -21,29 +21,24 @@ def mNEW_WASH(wash_file='',save_wash=False, overwrite=False):
     Returns wash object with all attributes of brew day, fermentation, etc.
     '''
 
-    # ================= INPUTS =============================
-    name = "None"
+    # ================= INPUTS ============================
+    id = "None"
     yeast = 'None'
-    wash = bu(saps,name)
+    wash = bu(saps,id)
     final_vol = mu.gal2l(6.5)
-    og = 1.075
-    fg = 1.007
-    og_temp = 70
-    fg_temp = 88
-
-    # ======== MASH ========================================
-    mash_in_temp_c = 70.5
-    ambient_temp = 15
-    grain_water_ratio = 3.5 # kg/l
-    mash_temp_data = False
-    if mash_temp_data:
-        print('load in data')
-
-
+    og = 1.01
+    fg = 1.009
+    og_temp = 75
+    fg_temp = 75
+    ambient_temp = 0
     # Grain Bill kgs
     grain_bill_dict = {
 
     }
+    notes = {''}
+    # ======== MASH ========================================
+    mash_in_temp_c = 70.5
+    grain_water_ratio = 3.5 # kg/l
 
     #====================================================================
     # --------- Mash and water calculations
@@ -61,6 +56,7 @@ def mNEW_WASH(wash_file='',save_wash=False, overwrite=False):
     wash.set_yeast(yeast)
     wash.set_final_vol_L(final_vol)
     wash.set_grain_bill_dict(grain_bill_dict)
+    wash.set_notes(notes)
     theoretical = wash.potential_gravity(grain_bill_dict, final_vol, 
                                     grain_units='plk')
     theo_points = (theoretical - 1) * 1000
@@ -69,7 +65,7 @@ def mNEW_WASH(wash_file='',save_wash=False, overwrite=False):
     abv = wash.abv(tog=og_temp,tfg=fg_temp)
 
     print('\n')
-    print("Wash: " + name + '\n')
+    print("Wash: " + id + '\n')
     print('MASH:')
     print('     Water vol(l):   {}'.format(round(mash_vol,2)))
     print('     Water vol(gal): {}'.format(round(mu.l2gal(mash_vol),2)))
@@ -90,7 +86,9 @@ def mNEW_WASH(wash_file='',save_wash=False, overwrite=False):
 
     return wash
 
-# Run function
-wash_file = './washes_pickle.pickle'
-wash = mNEW_WASH(wash_file, save_wash=False, overwrite=False)
+
+
+if "__main__" == __name__:
+    wash_file = './washes_pickle.pickle'
+    wash = mNEW_WASH(wash_file, save_wash=False, overwrite=False)
 
