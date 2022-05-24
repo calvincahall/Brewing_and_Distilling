@@ -27,7 +27,7 @@ def m20220424wash0026(wash='',save_wash=False, overwrite=False):
     wash = bu(saps,id)
     final_vol = mu.gal2l(14)
     og = 1.070
-    fg = 1.025
+    fg = 1.022
     og_temp = mu.c2f(40)
     fg_temp = mu.c2f(20)
     notes = {''}

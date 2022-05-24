@@ -1,9 +1,9 @@
 '''
-ID: 
-Type:       
-Name:
-Brewed:     
-Yeast:      
+ID:         b0003
+Type:       Ale
+Name:       
+Brewed:     22 May 2022
+Yeast:      Safe Ale US-05
 Secondary:  
 Kegged:     
 Kicked:     
@@ -19,37 +19,43 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
+def b20220522_tangerine_IPA(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
 
     # ================= INPUTS =============================
-    id = 'bXXXX'
+    id = 'b0003'
     name = "None"
-    classification = ""
-    beer_type = ""
-    yeast = ""
+    classification = "Ale"
+    beer_type = "IPA"
+    yeast = "Safe Ale US-05"
 
-    ambient_temp = 17 # C
-    final_vol = mu.gal2l(5)
-    og = 1.01
-    fg = 1.009
-    og_temp = 70 # F
-    fg_temp = 70 # F
+    ambient_temp = 16 # C
+    final_vol = mu.gal2l(5.5)
+    og = 1.078
+    fg = 1.018
+    og_temp = mu.c2f(24.4) # F
+    fg_temp = mu.c2f(20) # F
 
     # ======== HOPS ========================================
     # hops = [Alpha, Boil, Ounces]
-    hop1= np.array([1,60,0.25])
-    hop2 = np.array([10,0,5])
-    hops = np.array([hop1,hop2])
-    hop_types = ['Horizon', 'Centennial']
+    hop1 = np.array([12.4,60,0.5])
+    hop2 = np.array([12.4,30,0.5])
+    hop3 = np.array([4.7,15,1])
+    hop4 = np.array([6.5,15,1])
+    hop5 = np.array([10,0,3])
+    hops = np.array([hop1,hop2,hop3,hop4,hop5])
+    hop_types = ['Citra','Citra','Pacifica','Cascade', 'Centennial']
 
     # ======= GRAIN ========================================
     grain_bill_dict = {
-        'red_wheat_malt':   mu.lb2kg(6),
-        'two_row_malt':     mu.lb2kg(6),
-        'rye_malt':         mu.lb2kg(1),
+        'six_row_malt':     mu.lb2kg(2),
+        'rye_malt':         mu.lb2kg(0.5),
+        'pilsner_malt':     mu.lb2kg(10),
+        'caramel_malt_20l': mu.lb2kg(1),
+        'flaked_oats':      mu.lb2kg(1),
+        'pale_malt':        mu.lb2kg(1),    #misc from under the miller at quirky's
     }
 
     #====================================================================
@@ -58,7 +64,7 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
     beer = bu(saps, id)
     # ========= MASH =======================================
     mash_in_temp_c = 70.2 # F 
-    grain_water_ratio = 3.5 # kg/l
+    grain_water_ratio = 3.25 # kg/l
     total_grain = sum(grain_bill_dict.values())
     mash_vol, t_water = beer.mash_in(total_grain,mash_in_temp_c,
                                     grain_water_ratio,
@@ -81,7 +87,7 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
     theoretical = beer.potential_gravity(grain_bill_dict, final_vol, 
                                         grain_units='plk')
     theo_points = (theoretical - 1) * 1000
-    og_points = (og-1) * 1000
+    og_points = (og - 1) * 1000
     efficeincy = beer.efficiency(og_points, og_temp, theo_points)
     beer.set_efficeincy(efficeincy)
 
@@ -116,5 +122,5 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = bNEW_BEER(beer_file, save_beer=False, overwrite=False)
+    beer = b20220522_tangerine_IPA(beer_file, save_beer=False, overwrite=False)
     # print('stop')
