@@ -1,9 +1,9 @@
 '''
-ID:         b0005
+ID:         b0006
 Type:       Ale
-Name:       Clinton's Bach
-Brewed:     30 May 2022
-Yeast:      Safe Ale US-04
+Name:       Queen Beer
+Brewed:     30 June 2022
+Yeast:      Safe Ale US-05
 Secondary:  
 Kegged:     
 Kicked:     
@@ -19,40 +19,38 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
+def b20220730_queen_beer(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
 
     # ================= INPUTS =============================
-    id = 'b0005'
-    name = "Clinton's Bach"
+    id = 'b0006'
+    name = "Queen Beer"
     classification = "Ale"
     beer_type = "Brown Ale"
-    yeast = "Safe Ale US-04"
+    yeast = "Safe Ale US-05"
 
     ambient_temp = 21.3 # C
     final_vol = mu.gal2l(6.2)
-    og = 1.056
-    fg = 1.022
+    og = 1.058
+    fg = 1.015
     og_temp = mu.c2f(27) # F
     fg_temp = mu.c2f(23) # F
 
     # ======== HOPS ========================================
     # hops = [Alpha, Boil, Ounces]
-    hop1= np.array([4.5,60,1])
+    hop1= np.array([12,60,0.5])
     hops = np.array([hop1])
-    hop_types = ['Centennial']
+    hop_types = ['Mosaic']
 
     # ======= GRAIN ========================================
     grain_bill_dict = {
-        'pale_malt':            mu.lb2kg(6),
-        'caramel_malt_60l':     mu.lb2kg(2),
-        'biscuit_malt':         mu.lb2kg(2),
-        'chocolate_malt':       mu.lb2kg(1),
-        'abbey_malt':           mu.lb2kg(1),
-        'victory_malt':         mu.lb2kg(1),
-        'flaked_barley':        mu.lb2kg(0.5)
+        'pilsner_malt':         mu.lb2kg(3),
+        'amber_malt':           mu.lb2kg(1),
+        'six_row_malt':         mu.lb2kg(6),
+        'black_malt':           mu.lb2kg(0.25),
+        'caramel_malt_120l':     mu.lb2kg(2),
     }
 
     #====================================================================
@@ -119,5 +117,5 @@ def bNEW_BEER(beer_file='',save_beer=False, overwrite=False):
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = bNEW_BEER(beer_file, save_beer=True, overwrite=True)
+    beer = b20220730_queen_beer(beer_file, save_beer=True, overwrite=True)
     # print('stop')

@@ -25,7 +25,7 @@ def b20220522_tangerine_IPA(beer_file='',save_beer=False, overwrite=False):
     '''
 
     # ================= INPUTS =============================
-    id = 'b0003'
+    id = 'b0004'
     name = "None"
     classification = "Ale"
     beer_type = "IPA"
