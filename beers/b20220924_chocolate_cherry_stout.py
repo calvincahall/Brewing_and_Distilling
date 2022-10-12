@@ -1,16 +1,9 @@
-'''
-ID:         b0002
-Type:       Lager
-Name:       Poopy Flavored Push Pop
-Brewed:     20220115
-Yeast:      Safelager S-23
-Secondary:  20220121
-Kegged:     20220129
-Kicked:     TBD
-'''
+
 
 # Import Python Modules
 import numpy as np
+import sys
+
 
 # Import Custom Modules
 from BrewUtilities import BrewUtilities as bu
@@ -19,54 +12,49 @@ import MiscUtilities as mu
 # SAPS
 saps = mu.read_saps('./brew_saps.json')
 
-def b20220115chocolate_orange_lager(beer_file='',save_beer=False, overwrite=False):
+def b20220924_chocolate_cherry_stout(beer_file='',save_beer=False, overwrite=False):
     '''
     Returns beer object with all attributes of brew day, fermentation, etc.
     '''
 
     # ================= INPUTS =============================
-    id = "b0002"
-    name = "Poopy Flavored Push Pop"
-    classification = "Lager"
-    beer_type = "Brown Lager"
-    yeast = "Safe Lager S-23"
-    notes = {"It did not taste good. Poured out last gallon."}
+    id = 'b0007'
+    name = "Madam Curie's Cherry Pie"
+    classification = "Ale"
+    beer_type = "Stout"
+    yeast = "WLP001 and SafeAle US-05"
 
-    beer = bu(saps, id)
-    beer.set_name(name)
-    final_vol = mu.gal2l(5)
-    og = 1.067
-    fg = 1.018
-    og_temp = mu.c2f(20.5) # F
-    fg_temp = mu.c2f(18.5) # F
-
-    # ========= MASH =======================================
-    mash_in_temp_c = 70.5
-    ambient_temp = 10
-    grain_water_ratio = 3.5 # kg/l
-    mash_temp_data = False
-    if mash_temp_data:
-        print('load in data')
+    ambient_temp = mu.f2c(65) # C
+    final_vol = mu.gal2l(5.4)
+    og = 1.076
+    fg = 1.016
+    og_temp = mu.c2f(26.4) # F
+    fg_temp = mu.c2f(19.4) # F
 
     # ======== HOPS ========================================
     # hops = [Alpha, Boil, Ounces]
-    hop1= np.array([12.9,60,0.2])
-    hop2 = np.array([12.9,0,0.5])
-    hops = np.array([hop1,hop2])
-    hop_types = ['Citra', 'Citra']
+    hop1= np.array([4.6,60,0.5])
+    hop2= np.array([4.6,30,0.5])
+    hops = np.array([hop1, hop2])
+    hop_types = ['Fuggle', 'Fuggle']
 
     # ======= GRAIN ========================================
     grain_bill_dict = {
-        'red_wheat_malt':       mu.lb2kg(2),
-        'two_row_malt':         mu.lb2kg(10),
-        'caramel_malt_120l':    mu.lb2kg(1),
-        'pale_chocolate_malt':  mu.lb2kg(0.5),
-        'flaked_oats':          mu.lb2kg(0.5)
+        'two_row_malt':         mu.lb2kg(14),
+        'caramel_malt_120l':    mu.lb2kg(2),
+        'black_malt':           mu.lb2kg(0.25),
+        'roasted_barley_malt':  mu.lb2kg(0.25),
+        'carafa_iii_malt':      mu.lb2kg(0.25),
+        'pale_chocolate_malt':  mu.lb2kg(1)
     }
 
     #====================================================================
     # --------- Mash and water calculations
     #====================================================================
+    beer = bu(saps, id)
+    # ========= MASH =======================================
+    mash_in_temp_c = 70.5 # F 
+    grain_water_ratio = 3.5 # kg/l
     total_grain = sum(grain_bill_dict.values())
     mash_vol, t_water = beer.mash_in(total_grain,mash_in_temp_c,
                                     grain_water_ratio,
@@ -85,13 +73,12 @@ def b20220115chocolate_orange_lager(beer_file='',save_beer=False, overwrite=Fals
     beer.set_grain_bill_dict(grain_bill_dict)
     beer.set_hop_types(hop_types)
     beer.set_hops(hops)
-    beer.set_notes(notes)
 
     theoretical = beer.potential_gravity(grain_bill_dict, final_vol, 
                                         grain_units='plk')
     theo_points = (theoretical - 1) * 1000
-    og_points = (og - 1) * 1000
-    efficeincy = beer.efficiency(og_points,og_temp,theo_points)
+    og_points = (og-1) * 1000
+    efficeincy = beer.efficiency(og_points, og_temp, theo_points)
     beer.set_efficeincy(efficeincy)
 
     abv = beer.abv(tog=og_temp,tfg=fg_temp)
@@ -125,5 +112,5 @@ def b20220115chocolate_orange_lager(beer_file='',save_beer=False, overwrite=Fals
 # Run function
 if __name__ == "__main__":
     beer_file = './beers_pickle.pickle'
-    beer = b20220115chocolate_orange_lager(beer_file, save_beer=True, overwrite=True)
+    beer = b20220924_chocolate_cherry_stout(beer_file, save_beer=False, overwrite=False)
     # print('stop')
