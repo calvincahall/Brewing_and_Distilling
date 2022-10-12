@@ -69,6 +69,15 @@ def molefraction2abv(x_ethanol):
 
     return abv
 
+def qrts_per_lb_2_l_per_kg(q_per_lb):
+    '''
+    Converts quarts per pound to liters per kg.
+    '''
+    kgs = lb2kg(1)
+    l = gal2l(0.25 * q_per_lb)
+    l_per_kgs = l/kgs
+    return l_per_kgs
+
 def abv2molefraction(abv):
     '''
     Assumes binary solution of ethanol and water. Returns the mole
@@ -273,23 +282,24 @@ def save_beer_to_archive(path_name, new_beer, overwrite=False):
         beer_list = []
 
     # Check for existance of beer
-    names = []
+    ids = []
     for beer in beer_list:
-        name = beer.get_name()
-        names.append(name)
+        id = beer.get_id()
+        ids.append(id)
 
-    new_name = new_beer.get_name()
-    if new_name in names:
+    new_id = new_beer.get_id()
+    if new_id in ids:
         if overwrite:
-            element = np.where(np.array(names)==new_name)[0]
+            element = np.where(np.array(ids)==new_id)[0]
             beer_list[element[0]] = new_beer
-            print(new_name + ' was overwritten.')
+            print(new_id + ' was overwritten.')
             # Find element number and replace
         else:
-            print(new_name + ' already exists and overwrite is set to False.')
+            print(new_id + ' already exists and overwrite is set to False.')
         
     else:
-        print(new_name + ' was written as new beer to archive.')
+        print(new_beer.get_id() +
+        ' was written as new beer to archive.')
         beer_list.append(new_beer)
 
     

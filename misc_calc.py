@@ -20,3 +20,10 @@ b2_grains = grains * b2_frac
 b3_grains = grains * b3_frac
 
 print('stop')
+
+m1 = 0.615
+m2 = 0.55
+v2 = 800
+v1 = (m2 * v2)/m1
+print(v1)
+
