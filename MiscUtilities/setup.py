@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 pypi_dependencies = ['numpy','scipy']
 setup(name='MiscUtilities',
 	version=0.1,
@@ -7,6 +7,6 @@ setup(name='MiscUtilities',
 	author='Calvin Cahall',
 	author_email='calvin.cahall10@gmail.com',
 	license='',
-	packages=['./'],
+	packages=find_packages(include=['MiscUtilities.*']),
 	zip_safe=False,
 	install_requires=pypi_dependencies)
